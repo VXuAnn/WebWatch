@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopBanHang", "ShopBanHang.csproj", "{A95352B3-51FE-408C-A405-1A6B6DC5E676}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A95352B3-51FE-408C-A405-1A6B6DC5E676}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A95352B3-51FE-408C-A405-1A6B6DC5E676}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A95352B3-51FE-408C-A405-1A6B6DC5E676}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A95352B3-51FE-408C-A405-1A6B6DC5E676}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {23E2A8F3-55C9-4746-B4FA-0197F4B43B08}
+	EndGlobalSection
+EndGlobal

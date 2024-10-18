@@ -1,7 +1,9 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ShopBanHang.Data;
 using ShopBanHang.Helpers;
+using static ShopBanHang.Data.AaashopContext;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +33,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 var app = builder.Build();
 
+
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -54,4 +58,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+
 app.Run();
+

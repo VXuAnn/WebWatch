@@ -17,6 +17,7 @@ namespace ShopBanHang.Controllers
 
 		public List<CartItem> Cart => HttpContext.Session.Get<List<CartItem>>(MySetting.CART_KEY) ?? new List<CartItem>();
 
+		[Authorize]
 		public IActionResult Index()
 		{ 
 			return View(Cart);
@@ -86,7 +87,7 @@ namespace ShopBanHang.Controllers
 			if (ModelState.IsValid)
 			{
 				var customerId = HttpContext.User.Claims.SingleOrDefault(p => p.Type == MySetting.CLAIM_CUSTOMERID).Value;
-				var khachHang = new KhachHang();
+				var khachHang = new Data.KhachHang();
 				if (model.GiongKhachHang)
 				{
 					khachHang = db.KhachHangs.SingleOrDefault(kh => kh.MaKh == customerId);

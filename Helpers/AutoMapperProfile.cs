@@ -8,7 +8,7 @@ namespace ShopBanHang.Helpers
 	{
 		public AutoMapperProfile()
 		{
-			CreateMap<RegisterVM, KhachHang>();
+			CreateMap<RegisterVM, Data.KhachHang>();
 			//.ForMember(kh => kh.HoTen, option => option.MapFrom(RegisterVM => RegisterVM.HoTen))
 			//.ReverseMap();
 		}

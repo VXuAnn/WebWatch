@@ -29,6 +29,7 @@
 	<!-- Template Stylesheet -->
 	<link href="~/css/style.css" rel="stylesheet">
 	@RenderSection("Styles", required: false)
+	@RenderSection("Css", required: false)
 </head>
 <body>
 	<div>
@@ -60,17 +61,28 @@
 					</button>
 					<div class="collapse navbar-collapse bg-white" id="navbarCollapse">
 						<div class="navbar-nav mx-auto">
-							<a asp-action="Index" asp-controller="Home" class="nav-item nav-link active">Home</a>
+							<a asp-action="Index" asp-controller="Home" class="nav-item nav-link active">Trang chủ</a>
 							<a asp-controller="HangHoa" asp-action="Index" class="nav-item nav-link">Sản phẩm</a>
 							@* <a asp-controller="KhachHang" asp-action="DangKy" class="nav-item nav-link">Đăng ký</a> *@
-							<a asp-action="Index" asp-controller="Cart" class="nav-item nav-link">Thanh toán</a>
+							@* <div class="nav-item dropdown">
+								<a asp-action="Index" asp-controller="Home" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Đơn hàng</a>
+								<div class="dropdown-menu m-0 bg-secondary rounded-0">
+									<a asp-action="Index" asp-controller="Cart" class="dropdown-item">Tình trạng đơn hàng</a>
+									<a asp-action="Checkout" asp-controller="HangHoa" class="dropdown-item">Sản phẩm đã mua</a>
+									<a asp-action="Index" asp-controller="Cart" class="dropdown-item">Thanh toán</a>
+
+                                    
+
+								</div>
+							</div> *@
+							@* <a asp-action="Index" asp-controller="Cart" class="nav-item nav-link">Thanh toán</a> *@
 
 							<div class="nav-item dropdown">
 								<a asp-action="Index" asp-controller="Home" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
 								<div class="dropdown-menu m-0 bg-secondary rounded-0">
-									<a asp-action="Index" asp-controller="Cart" class="dropdown-item">Giỏ hàng</a>
-									<a asp-action="Checkout" asp-controller="HangHoa" class="dropdown-item">Thanh toán</a>
-									<a href="testimonial.html" class="dropdown-item">Testimonial</a>
+									<a asp-action="Index" asp-controller="Cart" class="dropdown-item">Bài Viết</a>
+									<a asp-action="Checkout" asp-controller="HangHoa" class="dropdown-item">Thông tin cửa hàng</a>
+									@* <a href="testimonial.html" class="dropdown-item">Testimonial</a> *@
 					
 								</div>
 							</div>
@@ -92,20 +104,6 @@
 								</a>
 							}
 
-						</div>
-						<div class="overlay" id="overlay" style="display: none;">
-							<div class="form-container">
-								<div class="form-header">
-									<h2>Smember</h2>
-									<p>Vui lòng đăng nhập tài khoản Smember để xem ưu đãi và thanh toán dễ dàng hơn.</p>
-								</div>
-								<div class="form-buttons">
-									<button class="register-btn" onclick="handleRegister()">Đăng ký</button>
-									<button class="login-btn" onclick="handleLogin()">Đăng nhập</button>
-								</div>
-								<button onclick="hideOverlay()" style="margin-top: 10px; padding: 5px 10px;">Đóng</button> <!-- Optional close button -->
-							</div>
-						</div>
 					</div>
 				</nav>
 			</div>
@@ -156,7 +154,7 @@
 	<!-- Template Javascript -->
 	<script src="~/js/main.js"></script>
 	@RenderSection("Scripts", required: false)
-
+	@RenderSection("Js", required: false)
 	<script>
 		$(document).ready(function () {
 			$("#seachButton").click(function () {

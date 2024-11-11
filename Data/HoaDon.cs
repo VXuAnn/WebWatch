@@ -11,7 +11,7 @@ public partial class HoaDon
 
     public DateTime NgayDat { get; set; }
 
-    public DateTime? NgayCan { get; set; }
+    public DateTime? NgayHuy { get; set; }
 
     public DateTime? NgayGiao { get; set; }
 

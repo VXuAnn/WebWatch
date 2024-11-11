@@ -1,0 +1,38 @@
+﻿@model ShopBanHang.ViewModels.DanhGiaVM
+
+<form asp-action="PostReview" asp-controller="HangHoa" method="post">
+	<input type="hidden" name="MaHH" value="@Model.MaHH" /> <!-- Giả sử MaHH là ID sản phẩm -->
+	<div class="row g-4">
+		<div class="col-lg-6">
+			<div class="border-bottom rounded">
+				<input type="text" name="YourName" class="form-control border-0 me-4" placeholder="Your Name *" required>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="border-bottom rounded">
+				<input type="email" name="Email" class="form-control border-0" placeholder="Your Email *" required>
+			</div>
+		</div>
+		<div class="col-lg-12">
+			<div class="border-bottom rounded my-4">
+				<textarea name="MoTa" class="form-control border-0" cols="30" rows="8" placeholder="Your Review *" spellcheck="false" required></textarea>
+			</div>
+		</div>
+		<div class="col-lg-12">
+			<div class="d-flex justify-content-between py-3 mb-5">
+				<div class="d-flex align-items-center">
+					<p class="mb-0 me-3">Please rate:</p>
+					<div class="d-flex align-items-center" style="font-size: 12px;">
+						<input type="hidden" name="DanhGia" id="rating" value="5"> <!-- Giá trị đánh giá -->
+						<i class="fa fa-star" onclick="document.getElementById('rating').value=1;"></i>
+						<i class="fa fa-star" onclick="document.getElementById('rating').value=2;"></i>
+						<i class="fa fa-star" onclick="document.getElementById('rating').value=3;"></i>
+						<i class="fa fa-star" onclick="document.getElementById('rating').value=4;"></i>
+						<i class="fa fa-star" onclick="document.getElementById('rating').value=5;"></i>
+					</div>
+				</div>
+				<button type="submit" class="btn border border-secondary text-primary rounded-pill px-4 py-3">Post Comment</button>
+			</div>
+		</div>
+	</div>
+</form>

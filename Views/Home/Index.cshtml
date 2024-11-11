@@ -2,7 +2,207 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<link rel="stylesheet" href="~/SliderHome/css/style.css" asp-append-version="true">
+
+    <!-- carousel -->
+    <div class="carousel">
+        <!-- list item -->
+        <div class="list">
+            <div class="item">
+            <img src="~/SliderHome/image/img7.jpg" alt="Image 1">
+                <div class="content">
+                    @* <div class="author">DucAn Watch</div> *@
+                    <div class="title">DUC AN WATCH</div>
+                    <div class="topic">WATCH</div>
+                    <div class="des">
+                        <!-- lorem 50 -->
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
+                    </div>
+                    @* <div class="buttons">
+                        <button>SEE MORE</button>
+                        <button>SUBSCRIBE</button>
+                    </div> *@
+                    <div class="buttons">
+                        <button onclick="window.location.href='/HangHoa/Index'">SEE MORE</button>
+                        <button onclick="window.location.href='/KhachHang/DangNhap'">SUBSCRIBE</button>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+            <img src="~/SliderHome/image/img8.jpg" alt="Image 2">
+                <div class="content">
+                    @* <div class="author">DucAn Watch</div> *@
+                    <div class="title">DUC AN WATCH</div>
+                    <div class="topic">WATCH</div>
+                    <div class="des">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
+                    </div>
+                    <div class="buttons">
+                        <button onclick="window.location.href='/HangHoa/Index'">SEE MORE</button>
+                        <button onclick="window.location.href='/KhachHang/DangNhap'">SUBSCRIBE</button>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+            <img src="~/SliderHome/image/img5.jpg" alt="Image 3">
+                <div class="content">
+                    @* <div class="author">DucAn Watch</div> *@
+                    <div class="title">DUC AN WATCH</div>
+                    <div class="topic">WATCH</div>
+                    <div class="des">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
+                    </div>
+                    <div class="buttons">
+                        <button onclick="window.location.href='/HangHoa/Index'">SEE MORE</button>
+                        <button onclick="window.location.href='/KhachHang/DangNhap'">SUBSCRIBE</button>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+            <img src="~/SliderHome/image/img6.jpg" alt="Image 4">
+                <div class="content">
+                    @* <div class="author">DucAn Watch</div> *@
+                    <div class="title">DUC AN WATCH</div>
+                    <div class="topic">WATCH</div>
+                    <div class="des">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
+                    </div>
+                    <div class="buttons">
+                        <button onclick="window.location.href='/HangHoa/Index'">SEE MORE</button>
+                        <button onclick="window.location.href='/KhachHang/DangNhap'">SUBSCRIBE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- list thumnail -->
+        <div class="thumbnail">
+            <div class="item">
+            <img src="~/SliderHome/image/img7.jpg" alt="Thumbnail 1">
+                <div class="content">
+                    <div class="title">
+                        CHẤT LƯỢNG
+                    </div>
+                    <div class="description">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+            <img src="~/SliderHome/image/img8.jpg" alt="Thumbnail 2">
+                <div class="content">
+                    <div class="title">
+                        UY TÍN
+                    </div>
+                    @* <div class="description">
+                        Đặt lên hàng đầu
+                    </div> *@
+                </div>
+            </div>
+            <div class="item">
+            <img src="~/SliderHome/image/img5.jpg" alt="Thumbnail 3">
+                <div class="content">
+                    <div class="title">
+                        ĐẲNG CẤP
+                    </div>
+                    @* <div class="description">
+                        Description
+                    </div> *@
+                </div>
+            </div>
+            <div class="item">
+            <img src="~/SliderHome/image/img6.jpg" alt="Thumbnail 4">
+                <div class="content">
+                    <div class="title">
+                        NIỀM TIN
+                    </div>
+                    @* <div class="description">
+                        Description
+                    </div> *@
+                </div>
+            </div>
+        </div>
+        <!-- next prev -->
+
+        <div class="arrows">
+            <button id="prev"><</button>
+            <button id="next">></button>
+        </div>
+        <!-- time running -->
+        <div class="time"></div>
+    </div>
+<div class="brand-section">
+    <h2>THƯƠNG HIỆU ĐỒNG HỒ NỔI TIẾNG</h2>
+    <div class="brand-list">
+        <img src="~/SliderHome/image/casio.png" alt="CASIO">
+        <img src="~/SliderHome/image/orient.jpg" alt="ORIENT">
+        <img src="~/SliderHome/image/citizen.jpg" alt="CITIZEN">
+        <img src="~/SliderHome/image/dw.jpg" alt="Daniel Wellington">
+        <img src="~/SliderHome/image/seiko.jpg" alt="SEIKO">
+        <img src="~/SliderHome/image/gshock.jpg" alt="G-SHOCK">
+        <img src="~/SliderHome/image/babyg.jpg" alt="BABY-G">
+        <img src="~/SliderHome/image/fossil.png" alt="FOSSIL">
+        <img src="~/SliderHome/image/srwatch.jpg" alt="SR WATCH">
+    </div>
+
+    <h2>THƯƠNG HIỆU ĐỒNG HỒ CAO CẤP THỤY SỸ</h2>
+    <div class="brand-list">
+        <img src="~/SliderHome/image/doxa.png" alt="DOXA">
+        <img src="~/SliderHome/image/longines.jpg" alt="LONGINES">
+        <img src="~/SliderHome/image/titoni.jpg" alt="TITONI">
+        <img src="~/SliderHome/image/frederique.png" alt="FREDERIQUE CONSTANT">
+        <img src="~/SliderHome/image/rado.jpg" alt="RADO">
+        <img src="~/SliderHome/image/mido.png" alt="MIDO">
+        <img src="~/SliderHome/image/calvinklein.jpg" alt="Calvin Klein">
+        <img src="~/SliderHome/image/certina.jpg" alt="CERTINA">
+    </div>
+
+ 
 </div>
+<div class="reasons-section">
+    <h2>10 LÝ DO NÊN MUA TẠI ĐỒNG HỒ ĐỨC AN</h2>
+    <div class="reasons-grid">
+        <div class="reason-item">
+            <h3>1. 100% CHÍNH HÃNG</h3>
+            <p>100% nhập khẩu chính ngạch (có giấy chứng nhận quyền từ hãng), mẫu mã mới mỗi ngày. Không có bất kỳ rủi ro nào khi mua sắm, đến gặp 10 nếu phát hiện hàng giả.</p>
+        </div>
+        <div class="reason-item">
+            <h3>2. SẢN PHẨM ĐƯỢC QC KỸ LƯỠNG</h3>
+            <p>Đồng hồ phải trải qua quá trình kiểm định chất lượng bằng tay, nếu phát hiện lỗi (dù là nhỏ nhất) đều trả về nhà sản xuất. 100% sản phẩm là hàng loại 1.</p>
+        </div>
+        <div class="reason-item">
+            <h3>3. ĐỒNG HỒ ĐƯỢC BỌC NILON TRÁNH BỤI BẨN</h3>
+            <p>Sau khi QC hoàn tất, đồng hồ được bọc 1 lớp nilon mỏng để ngăn chặn bụi bẩn, trầy xước và mồ hôi xuyên suốt quá trình vận chuyển, trưng bày và tư vấn.</p>
+        </div>
+        <div class="reason-item">
+            <h3>4. ĐỒNG HỒ CƠ ĐƯỢC ĐẶT TRONG HỘP XOAY CÓT</h3>
+            <p>Trước khi trưng bày lên kệ, tất cả đồng hồ cơ đều được cho vào hộp xoay để tạo năng lượng, giúp đồng hồ hoạt động mượt mà, đảm bảo chất lượng tốt nhất.</p>
+        </div>
+        <div class="reason-item">
+            <h3>5. MẪU MỚI CẬP NHẬT LIÊN TỤC, PHÂN PHỐI ĐỘC QUYỀN</h3>
+            <p>Hải Triều là nhà bán lẻ uy tín hàng đầu các thương hiệu cao cấp, những bộ sưu tập mới nhất luôn được ưu tiên mang đến sớm tại cửa hàng chúng tôi. Từ đó đảm bảo khách hàng có sở hữu nhanh chóng.</p>
+        </div>
+        <div class="reason-item">
+            <h3>6. MỖI NHÂN VIÊN LÀ 1 CHUYÊN GIA VỀ ĐỒNG HỒ</h3>
+            <p>Giám đốc các hãng Tissot, Doxa, DW, Rado, Seiko,… trực tiếp về Việt Nam đào tạo và cấp chứng nhận cho nhân viên Hải Triều. Với kiến thức chuyên sâu sản phẩm, chúng tôi tự tin tư vấn thông tin chính xác, tin cậy đến khách hàng.</p>
+        </div>
+        <div class="reason-item">
+            <h3>7. TIÊU CHUẨN PHỤC VỤ 5C</h3>
+            <p>“Chủ động - Cuối - Chào - Chăm sóc - Cảm ơn” là tiêu chuẩn phục vụ 5C ngành thời trang cao cấp, giúp bạn có trải nghiệm mua sắm tuyệt vời tại Hải Triều.</p>
+        </div>
+        <div class="reason-item">
+            <h3>8. KHÔNG GIAN MUA SẮM SANG TRỌNG</h3>
+            <p>Sản phẩm trưng bày thông minh, dễ chọn lựa. Hệ thống tủ, mùi hương, ánh sáng, cách bày trí tạo đủ yếu tố mà hãng đưa ra. Các showroom nằm trên tuyến đường lớn dễ di chuyển.</p>
+        </div>
+        <div class="reason-item">
+            <h3>9. BẢO HÀNH VƯỢT CHÍNH SÁCH</h3>
+            <p>Hết 1 năm bảo hành hãng, bạn được tặng thêm 3-4 năm bảo hành độc quyền, 1 đổi 1, miễn phí thay pin trọn đời, miễn phí vận chuyển toàn quốc. Nhận hàng, kiểm tra rồi mới thanh toán, không thích - không sao - có trả lại vẫn được miễn phí vận chuyển.</p>
+        </div>
+        <div class="reason-item">
+            <h3>10. SỞ HỮU PHÒNG BẢO DƯỠNG ĐẠT CHUẨN THỤY SỸ</h3>
+            <p>Hải Triều tiên phong mở Trung tâm sửa đồng hồ theo tiêu chuẩn Thụy Sỹ và khách hàng của Hải Triều được ưu tiên sử dụng dịch vụ. 100% máy móc nhập khẩu, quy trình quốc tế, linh kiện chính hãng, kỹ thuật viên có chứng nhận từ hãng,... mang lại quyền an tâm tuyệt đối.</p>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/SliderHome/js/app.js" asp-append-version="true"></script>

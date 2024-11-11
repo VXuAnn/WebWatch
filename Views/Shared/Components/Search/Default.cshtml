@@ -1,0 +1,88 @@
+﻿@model List<ShopBanHang.ViewModels.SearchVM>
+
+<div class="container">
+    <!-- Thẻ span để hiển thị giá trị đã chọn cho từng loại bộ lọc -->
+    <div class="mb-3">
+        <span id="selectedPrice" class="badge bg-primary text-white">Chọn mức giá</span>
+        <span id="selectedGender" class="badge bg-success text-white">Chọn giới tính</span>
+        <span id="selectedBrand" class="badge bg-warning text-dark">Chọn thương hiệu</span>
+    </div>
+
+    <!-- Bộ lọc thương hiệu -->
+    <div class="filter-section">
+        <div class="dropdown d-inline-block">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                LỌC THEO GIÁ
+            </button>
+            <ul class="dropdown-menu p-3">
+                <div class="d-flex flex-wrap">
+                <li><button class="btn btn-outline-secondary me-2 mb-2" onclick="togglePriceFilter('0 - 2Tr')">0 - 2Tr</button></li>
+                <li><button class="btn btn-outline-secondary me-2 mb-2" onclick="togglePriceFilter('2Tr - 4Tr')">2Tr - 4Tr</button></li>
+                <li><button class="btn btn-outline-secondary me-2 mb-2" onclick="togglePriceFilter('4Tr - 6Tr')">4Tr - 6Tr</button></li>
+                <li><button class="btn btn-outline-secondary me-2 mb-2" onclick="togglePriceFilter('6Tr - 8Tr')">6Tr - 8Tr</button></li>
+                <li><button class="btn btn-outline-secondary me-2 mb-2" onclick="togglePriceFilter('8Tr - 10Tr')">8Tr - 10Tr</button></li>
+                <li><button class="btn btn-outline-secondary me-2 mb-2" onclick="togglePriceFilter('10Tr - 20Tr')">10Tr - 20Tr</button></li>
+                <li><button class="btn btn-outline-secondary me-2 mb-2" onclick="togglePriceFilter('20Tr - 40Tr')">20Tr - 40Tr</button></li>
+                <li><button class="btn btn-outline-secondary me-2 mb-2" onclick="togglePriceFilter('40Tr - 100Tr')">40Tr - 100Tr</button></li>
+                <li><button class="btn btn-outline-secondary me-2 mb-2" onclick="togglePriceFilter('+100Tr')">+100Tr</button></li>
+        </div>
+        </ul>
+    </div>
+
+    <div class="dropdown d-inline-block">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            GIỚI TÍNH
+        </button>
+        <ul class="dropdown-menu p-3" style="max-height: 300px; overflow-y: auto;">
+            <li><button class="btn btn-outline-secondary mb-2" onclick="toggleGenderFilter('Nam')">Nam</button></li>
+            <li><button class="btn btn-outline-secondary mb-2" onclick="toggleGenderFilter('Nữ')">Nữ</button></li>
+            <li><button class="btn btn-outline-secondary mb-2" onclick="toggleGenderFilter('Unisex')">Unisex</button></li>
+        </ul>
+    </div>
+
+    <div class="dropdown d-inline-block">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            THƯƠNG HIỆU
+        </button>
+        <ul class="dropdown-menu p-3" style="max-height: 300px; overflow-y: auto;">
+                @foreach (var item in Model)
+                {
+                <li><button class="btn btn-outline-secondary mb-2" onclick="toggleBrandFilter('@item.TenCongTy')">@item.TenCongTy</button></li>
+                }
+        </ul>
+    </div>
+
+    <button class="btn btn-primary ms-2">Xem Kết Quả</button>
+</div>
+</div>
+
+<script>
+    function togglePriceFilter(value) {
+        const selectedPrice = document.getElementById('selectedPrice');
+        selectedPrice.innerText = (selectedPrice.innerText === value) ? 'Chọn mức giá' : value;
+    }
+
+    function toggleGenderFilter(value) {
+        const selectedGender = document.getElementById('selectedGender');
+        selectedGender.innerText = (selectedGender.innerText === value) ? 'Chọn giới tính' : value;
+    }
+
+    function toggleBrandFilter(value) {
+        const selectedBrand = document.getElementById('selectedBrand');
+        selectedBrand.innerText = (selectedBrand.innerText === value) ? 'Chọn thương hiệu' : value;
+    }
+    document.querySelector(".btn-primary").addEventListener("click", function () {
+        const price = document.getElementById('selectedPrice').innerText;
+        const gender = document.getElementById('selectedGender').innerText;
+        const brand = document.getElementById('selectedBrand').innerText;
+
+        // Check for default values and set to null if default
+        const priceFilter = (price === "Chọn mức giá") ? null : price;
+        const genderFilter = (gender === "Chọn giới tính") ? null : gender;
+        const brandFilter = (brand === "Chọn thương hiệu") ? null : brand;
+
+        // Redirect to Search action with query parameters
+        const url = `/HangHoa/Search?priceRange=${priceFilter || ""}&gender=${genderFilter || ""}&brand=${brandFilter || ""}`;
+        window.location.href = url;
+    });
+</script>

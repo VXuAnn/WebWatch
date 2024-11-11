@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ShopBanHang.Data;
+using System.Web;
 
 namespace ShopBanHang.Areas.Admin.Controllers
 {
-	[Area("admin")]
+	/*[Area("admin")]*/
+	[Area("Admin")]
 	/*[Route("/")]*/
 	[Route("admin/home")]
 	public class HomeAdminController : Controller
@@ -13,5 +16,6 @@ namespace ShopBanHang.Areas.Admin.Controllers
 		{
 			return View();
 		}
+
 	}
 }

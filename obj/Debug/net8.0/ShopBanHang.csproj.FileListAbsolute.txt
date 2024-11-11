@@ -260,3 +260,9 @@ C:\Users\vuxua\source\repos\ShopBanHang\bin\Debug\net8.0\AutoMapper.dll
 C:\Users\vuxua\source\repos\ShopBanHang\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\vuxua\source\repos\ShopBanHang\obj\Debug\net8.0\ShopBanHang.sourcelink.json
 C:\Users\vuxua\source\repos\ShopBanHang\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\vuxua\source\repos\ShopBanHang\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\vuxua\source\repos\ShopBanHang\bin\Debug\net8.0\X.PagedList.dll
+C:\Users\vuxua\source\repos\ShopBanHang\bin\Debug\net8.0\X.PagedList.Mvc.Core.dll
+C:\Users\vuxua\source\repos\ShopBanHang\obj\Debug\net8.0\ShopBanHang.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\vuxua\source\repos\ShopBanHang\bin\Debug\net8.0\X.PagedList.Web.Common.dll
+C:\Users\vuxua\source\repos\ShopBanHang\bin\Debug\net8.0\System.Linq.Dynamic.Core.dll

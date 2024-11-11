@@ -11,9 +11,23 @@ public partial class NhanVien
 
     public string Email { get; set; } = null!;
 
-    public string? MatKhau { get; set; }
+    public string? LoginName { get; set; }
+
+    public string? Password { get; set; }
+
+    public Guid? GroupId { get; set; }
+
+    public Guid? CategoryId { get; set; }
+
+    public DateTime? LastLogin { get; set; }
+
+    public virtual ICollection<Article> Articles { get; set; } = new List<Article>();
+
+    public virtual Category? Category { get; set; }
 
     public virtual ICollection<ChuDe> ChuDes { get; set; } = new List<ChuDe>();
+
+    public virtual NhomQuyen? Group { get; set; }
 
     public virtual ICollection<HoaDon> HoaDons { get; set; } = new List<HoaDon>();
 

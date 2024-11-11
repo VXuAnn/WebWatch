@@ -3,6 +3,8 @@ using ShopBanHang.Data;
 using ShopBanHang.ViewModels;
 using ShopBanHang.Helpers;
 using Microsoft.AspNetCore.Authorization;
+using System.Text.Json;
+using System.Security.Claims;
 
 namespace ShopBanHang.Controllers
 {
@@ -15,11 +17,43 @@ namespace ShopBanHang.Controllers
 			db = context;
 		}
 
-		public List<CartItem> Cart => HttpContext.Session.Get<List<CartItem>>(MySetting.CART_KEY) ?? new List<CartItem>();
+		/*public List<CartItem> Cart => HttpContext.Session.Get<List<CartItem>>(MySetting.CART_KEY) ?? new List<CartItem>();*/
+		// Lấy giỏ hàng từ Session
+		/*[Authorize]*/
+		/*public IActionResult Index()
+		{
+			var userId = User.FindFirstValue(MySetting.CLAIM_CUSTOMERID);
+			var cartItems = db.GioHangs
+							  .Where(c => c.MaKh == userId)
+							  .Select(c => new CartItemVM
+							  {
+								  Id = c.MaKH,
+								  MaHh = c.MaHh,
+								  Hinh = c.Hinh,
+								  TenHH = c.TenHH,
+								  DonGia = c.DonGia,
+								  SoLuong = c.SoLuong,
+								  UserId = c.UserId
+							  }).ToList();
 
+			return View(cartItems);
+		}*/
+		public List<CartItem> Cart
+        {
+            get
+            {
+                var cartJson = HttpContext.Session.GetString(MySetting.CART_KEY);
+                return cartJson == null ? new List<CartItem>() : JsonSerializer.Deserialize<List<CartItem>>(cartJson);
+            }
+            set
+            {
+                var cartJson = JsonSerializer.Serialize(value);
+                HttpContext.Session.SetString(MySetting.CART_KEY, cartJson);
+            }
+        }
 		[Authorize]
 		public IActionResult Index()
-		{ 
+		{
 			return View(Cart);
 		}
 		[Authorize]
@@ -51,9 +85,10 @@ namespace ShopBanHang.Controllers
 				item.SoLuong += quantity;
 			}
 
-			HttpContext.Session.Set(MySetting.CART_KEY, gioHang);
+            /*HttpContext.Session.Set(MySetting.CART_KEY, gioHang);*/
+            Cart = gioHang;
 
-			return RedirectToAction("Index");
+            return RedirectToAction("Index");
 		}
 		[Authorize]
 		[HttpGet]
@@ -64,9 +99,10 @@ namespace ShopBanHang.Controllers
 			if (item != null)
 			{
 				gioHang.Remove(item);
-				HttpContext.Session.Set(MySetting.CART_KEY, gioHang);
+				/*HttpContext.Session.Set(MySetting.CART_KEY, gioHang);*/
 			}
-			return RedirectToAction("Index");
+            Cart = gioHang;
+            return RedirectToAction("Index");
 		}
 		[Authorize]
 		[HttpGet]

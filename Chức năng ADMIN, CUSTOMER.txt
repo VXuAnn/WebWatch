@@ -1,0 +1,33 @@
+I. Admin
+1. Quản lý tài khoản quản trị
+-Danh sách tài khoản quản trị
+-Lọc tài khoản quản trị
+-Cấu hình tài khoản quản trị
+2. Quản lý sản phẩm
+- Danh sách sản phẩm
+- Tìm kiếm sản phẩm
+- Thêm sửa xóa sản phẩm
+3. Quản lý khách hànng
+- Danh sách khách hang
+- Tìm kiếm khách hang
+4. Quản lý đơn hang
+- Danh sách đơn hang
+- Lọc đơn hang
+- Tìm kiếm đơn hang
+5. Quản lý danh mục sản phẩm
+6. Quản lý quyền truy cập
+7. Quản lý bài viết
+8. Thống kê
+- Doanh số: Theo ngày, theo tháng, theo năm
+
+II. Khách hang
+1. Xử lý trang chủ
+2. Xử lý trang danh mục sản phẩm
+3. Xử lý trang tin tức
+4. Page thông tin
+5. Trang liên hệ
+6. Trang chi tiết sản phẩm
+7 Xử lý trang giỏ hang
+8. Xử lý trang mua hang
+9 Trang thông tin khách hang
+10. Danh sách đơn hàng

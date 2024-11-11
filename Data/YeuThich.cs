@@ -15,6 +15,8 @@ public partial class YeuThich
 
     public string? MoTa { get; set; }
 
+    public int? DanhGia { get; set; }
+
     public virtual HangHoa? MaHhNavigation { get; set; }
 
     public virtual KhachHang? MaKhNavigation { get; set; }

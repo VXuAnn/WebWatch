@@ -8,6 +8,7 @@ using ShopBanHang.Helpers;
 using ShopBanHang.ViewModels;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 
 
 
@@ -129,7 +130,7 @@ namespace ShopBanHang.Controllers
                 return Redirect("/KhachHang/Dangnhap"); // Chuyển hướng đến trang đăng nhập
             }
             // Lấy mã khách hàng (id) từ thông tin của người dùng đã đăng nhập
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Lấy ID người dùng từ Claim
+            var userId = User.FindFirstValue(MySetting.CLAIM_CUSTOMERID); // Lấy ID người dùng từ Claim
 
 			if (string.IsNullOrEmpty(userId))
 			{
@@ -146,27 +147,77 @@ namespace ShopBanHang.Controllers
 				TempData["Message"] = "Không tìm thấy khách hàng";
 				return Redirect("/404");
 			}
-
-			// Khởi tạo đối tượng KhachHang với các thông tin từ cơ sở dữ liệu
 			var result = new ShopBanHang.ViewModels.KhachHang
 			{
                 Id = data.MaKh,
                 HoTen = data.HoTen,
+				GioiTinh = data.GioiTinh,
                 Email = data.Email ?? "Email chưa cập nhật", // Hiển thị thông báo mặc định nếu Email null
                 DienThoai = data.DienThoai ?? "Số điện thoại chưa cập nhật", // Tương tự với số điện thoại
-                VaiTro = data.VaiTro,
+      
                 DiaChi = data.DiaChi ?? "Địa chỉ chưa cập nhật", // Tương tự với địa chỉ
                 Hinh = data.Hinh ?? string.Empty  // Kiểm tra nếu hình null thì dùng chuỗi rỗng
             };
+         
 
-			// Trả về view và truyền đối tượng KhachHang để hiển thị thông tin
-			return View(result);
-			/*return View();*/
+            return View(result);
+		}
+
+		public IActionResult ThongTinTaiKhoan()
+		{
+            var userId = User.FindFirstValue(MySetting.CLAIM_CUSTOMERID);
+            if (string.IsNullOrEmpty(userId))
+            {
+                // If no customer ID is found, redirect to login or handle accordingly
+                TempData["Message"] = "Bạn cần đăng nhập.";
+                return RedirectToAction("DangNhap", "KhachHang");
+            }
+			var data = (from kh in db.KhachHangs
+						where kh.MaKh == userId
+						select new ShopBanHang.ViewModels.KhachHang
+						{
+							HoTen = kh.HoTen,
+							Email= kh.Email,
+							DiaChi =kh.DiaChi,
+							DienThoai=kh.DienThoai,
+							Hinh=kh.Hinh
+						}).FirstOrDefault();
+
+            return PartialView("_ThongTinTaiKhoan",data);
+        }
+
+		public IActionResult ThongTinDonHang()
+		{
+			var userId = User.FindFirstValue(MySetting.CLAIM_CUSTOMERID);
+			if (string.IsNullOrEmpty(userId))
+			{
+				// If no customer ID is found, redirect to login or handle accordingly
+				TempData["Message"] = "Bạn cần đăng nhập để xem thông tin đơn hàng.";
+				return RedirectToAction("DangNhap", "KhachHang");
+			}
+			var orders = (from hd in db.HoaDons
+						  join kh in db.KhachHangs on hd.MaKh equals kh.MaKh
+						  join th in db.TrangThais on hd.MaTrangThai equals th.MaTrangThai
+						  join cthd in db.ChiTietHds on hd.MaHd equals cthd.MaHd
+						  join hh in db.HangHoas on cthd.MaHh equals hh.MaHh
+						  where kh.MaKh == userId
+						  select new HoaDonVM
+						  {
+							  DonGia = (float)(hh.DonGia ?? 0),
+							  Hinh = hh.Hinh ?? string.Empty,
+							  SoLuong = cthd.SoLuong,
+							  TenTrangThai = th.TenTrangThai,
+							  TongTien = (float)(hh.DonGia * cthd.SoLuong ?? 0),
+							  TenKH = kh.HoTen,
+							  DienThoai = kh.DienThoai
+						  }).ToList();
+
+			return PartialView("_ThongTinDonHang", orders);
 		}
 
 
 
-        [Authorize]
+		[Authorize]
 		public async Task<IActionResult> DangXuat()
 		{
 			await HttpContext.SignOutAsync();
@@ -174,3 +225,6 @@ namespace ShopBanHang.Controllers
 		}
 	}
 }
+
+// 6LfQPW8qAAAAAORQiIql_HYqzW9k6Uq_eY6n749Q
+// 6LfQPW8qAAAAADNMtPJLrOkaL5OKb4ro-0JLRNJW

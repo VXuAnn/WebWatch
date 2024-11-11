@@ -15,13 +15,19 @@ public partial class AaashopContext : DbContext
     {
     }
 
+    public virtual DbSet<Article> Articles { get; set; }
+
+    public virtual DbSet<Authorized> Authorizeds { get; set; }
+
     public virtual DbSet<BanBe> BanBes { get; set; }
+
+    public virtual DbSet<Category> Categories { get; set; }
 
     public virtual DbSet<ChiTietHd> ChiTietHds { get; set; }
 
     public virtual DbSet<ChuDe> ChuDes { get; set; }
 
-    public virtual DbSet<GopY> Gopies { get; set; }
+    public virtual DbSet<GioHang> GioHangs { get; set; }
 
     public virtual DbSet<HangHoa> HangHoas { get; set; }
 
@@ -37,6 +43,8 @@ public partial class AaashopContext : DbContext
 
     public virtual DbSet<NhanVien> NhanViens { get; set; }
 
+    public virtual DbSet<NhomQuyen> NhomQuyens { get; set; }
+
     public virtual DbSet<PhanCong> PhanCongs { get; set; }
 
     public virtual DbSet<PhanQuyen> PhanQuyens { get; set; }
@@ -49,8 +57,6 @@ public partial class AaashopContext : DbContext
 
     public virtual DbSet<TrangWeb> TrangWebs { get; set; }
 
-    public virtual DbSet<User> Users { get; set; }
-
     public virtual DbSet<VChiTietHoaDon> VChiTietHoaDons { get; set; }
 
     public virtual DbSet<YeuThich> YeuThiches { get; set; }
@@ -61,6 +67,43 @@ public partial class AaashopContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Article>(entity =>
+        {
+            entity.ToTable("Article");
+
+            entity.Property(e => e.ArticleId).ValueGeneratedNever();
+            entity.Property(e => e.Content).HasMaxLength(50);
+            entity.Property(e => e.CreatedBy).HasMaxLength(50);
+            entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+            entity.Property(e => e.Keyword).HasMaxLength(50);
+            entity.Property(e => e.MaNv)
+                .HasMaxLength(50)
+                .HasColumnName("MaNV");
+            entity.Property(e => e.ModifiedBy).HasMaxLength(50);
+            entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
+            entity.Property(e => e.Picture).HasMaxLength(50);
+            entity.Property(e => e.Title).HasMaxLength(50);
+
+            entity.HasOne(d => d.MaNvNavigation).WithMany(p => p.Articles)
+                .HasForeignKey(d => d.MaNv)
+                .HasConstraintName("FK_Article_NhanVien");
+        });
+
+        modelBuilder.Entity<Authorized>(entity =>
+        {
+            entity.ToTable("Authorized");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
+
+            entity.HasOne(d => d.Group).WithMany(p => p.Authorizeds)
+                .HasForeignKey(d => d.GroupId)
+                .HasConstraintName("FK_Authorized_NhomQuyen");
+
+            entity.HasOne(d => d.Role).WithMany(p => p.Authorizeds)
+                .HasForeignKey(d => d.RoleId)
+                .HasConstraintName("FK_Authorized_Role");
+        });
+
         modelBuilder.Entity<BanBe>(entity =>
         {
             entity.HasKey(e => e.MaBb).HasName("PK_Promotions");
@@ -85,6 +128,18 @@ public partial class AaashopContext : DbContext
             entity.HasOne(d => d.MaKhNavigation).WithMany(p => p.BanBes)
                 .HasForeignKey(d => d.MaKh)
                 .HasConstraintName("FK_BanBe_KhachHang");
+        });
+
+        modelBuilder.Entity<Category>(entity =>
+        {
+            entity.ToTable("Category");
+
+            entity.Property(e => e.CategoryId).ValueGeneratedNever();
+            entity.Property(e => e.CreatedBy).HasMaxLength(50);
+            entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+            entity.Property(e => e.ModifiedBy).HasMaxLength(50);
+            entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
+            entity.Property(e => e.Name).HasMaxLength(50);
         });
 
         modelBuilder.Entity<ChiTietHd>(entity =>
@@ -115,12 +170,13 @@ public partial class AaashopContext : DbContext
             entity.ToTable("ChuDe");
 
             entity.Property(e => e.MaCd).HasColumnName("MaCD");
+            entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(50);
             entity.Property(e => e.MaNv)
                 .HasMaxLength(50)
                 .HasColumnName("MaNV");
-            entity.Property(e => e.TenCd)
-                .HasMaxLength(50)
-                .HasColumnName("TenCD");
+            entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
+            entity.Property(e => e.Title).HasMaxLength(50);
 
             entity.HasOne(d => d.MaNvNavigation).WithMany(p => p.ChuDes)
                 .HasForeignKey(d => d.MaNv)
@@ -128,28 +184,28 @@ public partial class AaashopContext : DbContext
                 .HasConstraintName("FK_ChuDe_NhanVien");
         });
 
-        modelBuilder.Entity<GopY>(entity =>
+        modelBuilder.Entity<GioHang>(entity =>
         {
-            entity.HasKey(e => e.MaGy);
+            entity.HasKey(e => e.MaGh);
 
-            entity.ToTable("GopY");
+            entity.ToTable("GioHang");
 
-            entity.Property(e => e.MaGy)
-                .HasMaxLength(50)
-                .HasColumnName("MaGY");
-            entity.Property(e => e.DienThoai).HasMaxLength(50);
-            entity.Property(e => e.Email).HasMaxLength(50);
-            entity.Property(e => e.HoTen).HasMaxLength(50);
-            entity.Property(e => e.MaCd).HasColumnName("MaCD");
-            entity.Property(e => e.NgayGy)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnName("NgayGY");
-            entity.Property(e => e.NgayTl).HasColumnName("NgayTL");
-            entity.Property(e => e.TraLoi).HasMaxLength(50);
+            entity.Property(e => e.MaGh)
+                .ValueGeneratedOnAdd()
+                .HasColumnName("MaGH");
+            entity.Property(e => e.MaHh).HasColumnName("MaHH");
+            entity.Property(e => e.MaKh)
+                .HasMaxLength(20)
+                .HasColumnName("MaKH");
 
-            entity.HasOne(d => d.MaCdNavigation).WithMany(p => p.Gopies)
-                .HasForeignKey(d => d.MaCd)
-                .HasConstraintName("FK_GopY_ChuDe");
+            entity.HasOne(d => d.MaGhNavigation).WithOne(p => p.GioHang)
+                .HasForeignKey<GioHang>(d => d.MaGh)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_GioHang_HangHoa");
+
+            entity.HasOne(d => d.MaKhNavigation).WithMany(p => p.GioHangs)
+                .HasForeignKey(d => d.MaKh)
+                .HasConstraintName("FK_GioHang_KhachHang");
         });
 
         modelBuilder.Entity<HangHoa>(entity =>
@@ -159,20 +215,24 @@ public partial class AaashopContext : DbContext
             entity.ToTable("HangHoa");
 
             entity.Property(e => e.MaHh).HasColumnName("MaHH");
+            entity.Property(e => e.CreatedBy).HasMaxLength(50);
+            entity.Property(e => e.CreatedOn).HasColumnType("datetime");
             entity.Property(e => e.DonGia).HasDefaultValue(0.0);
             entity.Property(e => e.Hinh).HasMaxLength(50);
             entity.Property(e => e.MaNcc)
                 .HasMaxLength(50)
                 .HasColumnName("MaNCC");
-            entity.Property(e => e.MoTaDonVi).HasMaxLength(50);
-            entity.Property(e => e.NgaySx)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime")
-                .HasColumnName("NgaySX");
+            entity.Property(e => e.ModifiedBy).HasMaxLength(50);
+            entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
             entity.Property(e => e.TenAlias).HasMaxLength(50);
             entity.Property(e => e.TenHh)
                 .HasMaxLength(50)
                 .HasColumnName("TenHH");
+            entity.Property(e => e.Title).HasMaxLength(50);
+
+            entity.HasOne(d => d.Category).WithMany(p => p.HangHoas)
+                .HasForeignKey(d => d.CategoryId)
+                .HasConstraintName("FK_HangHoa_HangHoa");
 
             entity.HasOne(d => d.MaLoaiNavigation).WithMany(p => p.HangHoas)
                 .HasForeignKey(d => d.MaLoai)
@@ -208,14 +268,14 @@ public partial class AaashopContext : DbContext
             entity.Property(e => e.MaNv)
                 .HasMaxLength(50)
                 .HasColumnName("MaNV");
-            entity.Property(e => e.NgayCan)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
             entity.Property(e => e.NgayDat)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.NgayGiao)
                 .HasDefaultValueSql("(((1)/(1))/(1900))")
+                .HasColumnType("datetime");
+            entity.Property(e => e.NgayHuy)
+                .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
 
             entity.HasOne(d => d.MaKhNavigation).WithMany(p => p.HoaDons)
@@ -318,7 +378,27 @@ public partial class AaashopContext : DbContext
                 .HasColumnName("MaNV");
             entity.Property(e => e.Email).HasMaxLength(50);
             entity.Property(e => e.HoTen).HasMaxLength(50);
-            entity.Property(e => e.MatKhau).HasMaxLength(50);
+            entity.Property(e => e.LastLogin).HasColumnType("datetime");
+            entity.Property(e => e.LoginName).HasMaxLength(50);
+            entity.Property(e => e.Password).HasMaxLength(50);
+
+            entity.HasOne(d => d.Category).WithMany(p => p.NhanViens)
+                .HasForeignKey(d => d.CategoryId)
+                .HasConstraintName("FK_NhanVien_Category");
+
+            entity.HasOne(d => d.Group).WithMany(p => p.NhanViens)
+                .HasForeignKey(d => d.GroupId)
+                .HasConstraintName("FK_NhanVien_NhomQuyen");
+        });
+
+        modelBuilder.Entity<NhomQuyen>(entity =>
+        {
+            entity.HasKey(e => e.GroupId).HasName("PK__NhomQuye__3214EC07049203BC");
+
+            entity.ToTable("NhomQuyen");
+
+            entity.Property(e => e.GroupId).ValueGeneratedNever();
+            entity.Property(e => e.Name).HasMaxLength(50);
         });
 
         modelBuilder.Entity<PhanCong>(entity =>
@@ -390,16 +470,13 @@ public partial class AaashopContext : DbContext
         {
             entity.ToTable("Role");
 
-            entity.Property(e => e.RoleId)
-                .HasMaxLength(10)
-                .IsFixedLength()
-                .HasColumnName("RoleID");
-            entity.Property(e => e.Detail)
-                .HasMaxLength(10)
-                .IsFixedLength();
-            entity.Property(e => e.RoleName)
-                .HasMaxLength(10)
-                .IsFixedLength();
+            entity.Property(e => e.RoleId).ValueGeneratedNever();
+            entity.Property(e => e.Code).HasMaxLength(50);
+            entity.Property(e => e.Name).HasMaxLength(50);
+
+            entity.HasOne(d => d.Category).WithMany(p => p.Roles)
+                .HasForeignKey(d => d.CategoryId)
+                .HasConstraintName("FK_Role_Category");
         });
 
         modelBuilder.Entity<TrangThai>(entity =>
@@ -423,28 +500,6 @@ public partial class AaashopContext : DbContext
             entity.Property(e => e.Url)
                 .HasMaxLength(250)
                 .HasColumnName("URL");
-        });
-
-        modelBuilder.Entity<User>(entity =>
-        {
-            entity.HasKey(e => e.Idcode);
-
-            entity.ToTable("User");
-
-            entity.Property(e => e.Idcode)
-                .HasMaxLength(10)
-                .IsFixedLength()
-                .HasColumnName("IDCode");
-            entity.Property(e => e.Emai)
-                .HasMaxLength(10)
-                .IsFixedLength();
-            entity.Property(e => e.UserId)
-                .HasMaxLength(10)
-                .IsFixedLength()
-                .HasColumnName("UserID");
-            entity.Property(e => e.UserPassword)
-                .HasMaxLength(10)
-                .IsFixedLength();
         });
 
         modelBuilder.Entity<VChiTietHoaDon>(entity =>

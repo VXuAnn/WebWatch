@@ -5,9 +5,15 @@ namespace ShopBanHang.Data;
 
 public partial class Role
 {
-    public string RoleId { get; set; } = null!;
+    public Guid RoleId { get; set; }
 
-    public string? RoleName { get; set; }
+    public string? Name { get; set; }
 
-    public string? Detail { get; set; }
+    public string? Code { get; set; }
+
+    public Guid? CategoryId { get; set; }
+
+    public virtual ICollection<Authorized> Authorizeds { get; set; } = new List<Authorized>();
+
+    public virtual Category? Category { get; set; }
 }
